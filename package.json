@@ -1,0 +1,34 @@
+{
+    "name": "jquery-timed-dialog",
+    "title": "jQuery Timed Dialog",
+    "version": "1.0.0",
+    "description": "A jQuery timed dialog UI",
+    "homepage": "https://github.com/armino-dev/jquery-timed-dialog#readme",
+    "main": "timed-dialog.js",
+    "scripts": {
+        "test": "npm test"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/armino-dev/jquery-timed-dialog.git"
+    },
+    "keywords": [
+        "jQuery",
+        "Dialog",
+        "UI"
+    ],
+    "author": {
+        "name": "Armino Popp, <devel@boioiong.com>",
+        "url": "https://github.com/armino-dev/jquery-timed-dialog"
+    },
+    "dependencies": {
+        "jquery": ">=1.7.0 <4.0.0"
+    },
+    "devDependencies": {
+
+    },
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/armino-dev/jquery-timed-dialog/issues"
+    }
+}
