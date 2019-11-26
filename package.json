@@ -4,9 +4,13 @@
     "version": "1.0.0",
     "description": "A jQuery timed dialog UI",
     "homepage": "https://github.com/armino-dev/jquery-timed-dialog#readme",
-    "main": "timed-dialog.js",
+    "main": "dist/timed-dialog.min.js",
     "scripts": {
-        "test": "npm test"
+        "build": "webpack",
+        "unit": "karma start karma.conf.js",
+        "test": "npm run unit",
+        "scss": "node-sass scss -o css",
+        "watch": "node-sass --watch scss -o css"
     },
     "repository": {
         "type": "git",
@@ -22,9 +26,17 @@
         "url": "https://github.com/armino-dev/jquery-timed-dialog"
     },
     "dependencies": {
-        "jquery": ">=1.7.0 <4.0.0"
+        "jquery": ">=1.7.0 <4.0.0",
+        "node-sass": "^4.13.0"
     },
-    "devDependencies": {},
+    "devDependencies": {
+        "karma": "^4.4.1",
+        "karma-chrome-launcher": "^3.1.0",
+        "karma-jasmine": "^2.0.1",
+        "mini-css-extract-plugin": "^0.8.0",
+        "webpack": "^4.41.2",
+        "webpack-cli": "^3.3.10"
+    },
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/armino-dev/jquery-timed-dialog/issues"
