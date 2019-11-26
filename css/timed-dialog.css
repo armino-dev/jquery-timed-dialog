@@ -1,0 +1,49 @@
+.timed-dialog-overlay {
+  background-color: rgba(155, 155, 155, 0.8); }
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+  padding: 0; }
+
+.timed-dialog {
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column; }
+  .timed-dialog * {
+    font-size: 16px;
+    font-family: sans-serif; }
+  .timed-dialog .header {
+    background-color: #1055aa;
+    color: white;
+    line-height: 1.2rem;
+    padding: 5px 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px; }
+    .timed-dialog .header .title {
+      font-size: 1.2rem;
+      padding: 0 10px; }
+  .timed-dialog .body {
+    min-height: 100px; }
+  .timed-dialog .action,
+  .timed-dialog .body {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 10px; }
+  .timed-dialog .btn {
+    width: 100%;
+    border: 0;
+    padding: 10px;
+    line-height: 16px;
+    color: white;
+    background-color: #555; }
+    .timed-dialog .btn.btn-primary {
+      background-color: #1055aa !important; }
+    .timed-dialog .btn:hover {
+      background-color: #aaa;
+      color: white; }
