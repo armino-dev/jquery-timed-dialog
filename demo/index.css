@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif:400,700&display=swap');
+@import "../css/timed-dialog.css";
+
+.container {
+    font-family: 'Noto Serif', serif;
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+  padding:10px; 
+}

@@ -3,11 +3,75 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>jQuery Timed Dialog UI - Default functionality</title>
+	<title>jQuery Timed Dialog UI - Default functionality</title>    
 	<link rel="stylesheet" href="index.css">
 </head>
 <body>
+<div class="container">
+    <h1>Demo for jQuery Timed Dialog Plugin</h1>
+    <h2>Info dialog modal</h2>
+    <h3>Simple info dialog modal</h3>
+    <button id="my-button-info" type="button" name="button">Show info</button>
+    <h3>Info dialog modal with auto dismiss on timer</h3>
+    <button id="my-button-info-with-timer" type="button" name="button">Show info with timer</button>
+    <h2>Confirmation modal dialog</h2>
+    <h3>Simple confirmation modal</h3>
+    <button id="my-button-confirm" type="button" name="button">Show confirmation</button>
+    <h3>Confirmation modal with auto dismiss on timer</h3>
+    <button id="my-button-confirm-with-timer" type="button" name="button">Show confirmation with timer</button>
+    <h3>Complex confirmation modal</h3>
+    <button id="my-button-confirm-complex-with-timer" type="button" name="button">Show dialog with timer and custom action</button>
+
+</div>
 
 </body>
-<script src="index.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="../src/timed-dialog.js"></script>
+<script type="text/javascript">
+
+        $(document).on('click', 'button', function() {
+            var options = {};
+            switch ($(this).attr('id')) {
+                case 'my-button-info':
+                    options = {
+                        type: 'info',
+                        title: 'Info',
+                        body: '<p>This is a simple info modal.</p><p>You can insert html markup also.</p>',
+                        width: 400,
+                        height: 280,
+                    };
+                break;
+                case 'my-button-info-with-timer':
+                    options = {
+                        type: 'info',
+                        title: 'Info',
+                        body: '<p>This is an info modal with autoclose on timer.</p><p>You can insert html markup also.</p>',
+                        width: 400,
+                        height: 280,
+                        closeOnTimer: true,
+                    };
+                break;
+                case 'my-button-confirm':
+                    options = {
+                        type: 'confirm',
+                        title: 'Confirm action',
+                        body: '<p>A simple confirm modal dialog.</p>',
+                        width: 400,
+                        height: 280,
+                    }
+                break;
+                case 'my-button-confirm-with-timer':
+                    options = {}
+                break;
+                case 'my-button-confirm-complex-with-timer':
+                    options = {}
+                break;
+            }
+
+            $(this).timedDialog(options);
+
+
+        });
+
+</script>
 </html>
