@@ -4,6 +4,8 @@ node_js:
 addons:
     chrome: stable
 script: node_modules/karma/bin/karma start karma.conf.js --single-run
+services:
+    - xvfb
 before_install:
     - export DISPLAY=:99.0
     - sh -e /etc/init.d/xvfb start
