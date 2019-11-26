@@ -1,6 +1,8 @@
 language: node_js
 node_js:
     - 13
+addons:
+  chrome: stable
 script: node_modules/karma/bin/karma start karma.conf.js --single-run
 before_script:
     - npm install
