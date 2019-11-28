@@ -11,43 +11,45 @@
             closeOnTimer: false,
             timeout: 10, //ten seconds default timeout
             isModal: true,
-            buttons: {},
-        };
-
-        const allowedTypes = ['info', 'confirmation'];
-        const allowedStyles = ['info', 'warning', 'danger'];
-        const infoDialogButtons = {
-            'dismiss': {
-                text: 'Ok',
-                action: () => {}
+            btnDismiss: {
+                text: "Dismiss",
+                class: '',
             },
-        };
-        const confirmDialogButtons = {
-            'confirm': {
-                text: 'Ok',
-                action: () => {
-                    return
-                }
-            },
-            'dismiss': {
-                text: 'Dismiss',
-                action: () => {
-                    return
-                }
-            },
+            btnConfirm: {
+                text: "Confirm",
+                action: () => {return},
+                class: '',
+            }
         };
 
 
         var settings = $.extend({}, this.defaults, options);
 
-        console.log('settings: ', settings);
+
+        const supportsShadowDOMV1 = !!HTMLElement.prototype.attachShadow;
+        console.log(supportsShadowDOMV1);
+
+
+        const body = document.body;
+        const html = document.documentElement;
+
+        var documentHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+        var documentWidth = Math.max(body.scrollWidth, body.offsetWidth, html.clientWidth, html.scrollWidth, html.offsetWidth);
+
+        console.log("Height: ", documentHeight, "Width: ",documentWidth);
+
+        const allowedTypes = ['info', 'confirmation'];
+        const allowedStyles = ['info', 'warning', 'danger'];
+
+
+
 
         const overlayCss = {
             'position': 'absolute',
             'top': 0,
             'left': 0,
-            'width': $(window).width() + 'px',
-            'height': $(window).height() + 'px',
+            'width': documentWidth + 'px',
+            'height': documentHeight + 'px',
             'z-index': '2000',
         };
         const dialogCss = {
@@ -58,24 +60,6 @@
             'z-index': '2001',
         };
 
-        switch (settings.type) {
-            default:
-            case 'info':
-                settings.buttons = infoDialogButtons;
-                settings.buttons.dismiss.action = () => {
-                    $(dialog).fadeOut();
-                    $(overlay).fadeOut(500, () => {
-                        $(overlay).remove();
-                    });
-
-                }
-                break;
-            case 'confirm':
-                settings.buttons = confirmDialogButtons;
-                break;
-        }
-
-        console.log('settings: ', settings);
 
         const random = randomString(5);
 
@@ -86,20 +70,21 @@
         const dialog = $(`
                     <div id="${containerId}" class="timed-dialog">
                         <div class="header">
+                            <div class="header-icon">i</div>
                             <h1 class="title">${settings.title}</h1>
+                            <button>x</button>
                         </div>
                         <div class="body">${settings.body}</div>
                         <div class="action"> </div>
                     </div>
             `);
 
-        const btnDismiss = $(`
-                <button class="btn btn-primary" id="btn-dismiss-${random}">${settings.buttons.dismiss.text}</button>
-                `);
-
-        // const btnConfirm = $(`
-        //         <button class="btn btn-primary" id="btn-confirm-${random}">${settings.buttons.confirm.text}</button>
-        //         `);
+        var btnDismiss = $(`
+            <button class="btn btn-primary" id="btn-dismiss-${random}">${settings.btnDismiss.text}</button>
+        `);
+        var btnConfirm = $(`
+            <button class="btn btn-primary" id="btn-confirm-${random}">${settings.btnConfirm.text}</button>
+        `);
 
         if (this.length > 1) {
             this.each(function() {
@@ -107,11 +92,6 @@
             });
 
             return this;
-        }
-
-        if (Object.keys(settings.buttons).length > 0) {
-            console.log('this: ', this);
-            console.log('settings.buttons: ', settings.buttons, ' length: ', Object.keys(settings.buttons).length);
         }
 
         /**
@@ -133,18 +113,18 @@
          * @return {[type]} [description]
          */
         function dismissDialog() {
-
+            $(dialog).fadeOut();
+            $(overlay).fadeOut(500, () => {
+                $(overlay).remove();
+            });
         }
 
         $(window).resize(() => {
-            $(overlay).css({
-                'width': $(window).width() + 'px',
-                'height': $(window).height() + 'px'
-            });
-            $(dialog).css({
-                'left': ($(overlay).width() - settings.width) / 2 + "px",
-                'top': ($(overlay).height() - settings.height) / 2 + "px"
-            });
+            redraw();
+        });
+
+        $(document).scroll(() => {
+            redraw();
         });
 
         var autoCloseText = $(btnDismiss).html();
@@ -165,13 +145,44 @@
         }
 
         function bindEvents() {
-            $(btnDismiss).click((e) => {
-                settings.buttons.dismiss.action();
+            $(btnDismiss).click( () => {
+                dismissDialog();
             });
-            $(overlay).click((e) => {
-                settings.buttons.dismiss.action();
+
+            $(btnConfirm).click( () => {
+                if (typeof settings.btnConfirm.action == 'function') {
+                    try {
+                        settings.btnConfirm.action();
+                    } catch (e) {
+                        console.log('')
+                    }
+                    dismissDialog();
+                } else {
+                    throw new Error('Confirmation button action must be a callback');
+                }
+            });
+
+            $(overlay).click( (evt) => {
+                // close only if target is not inside our dialogue
+                // or else the overlay will capture the clicks from
+                // our dialog elements, if any
+                if (dialog.not(evt.target) && dialog.has(evt.target).length === 0) {
+                    dismissDialog();
+                }
             });
         }
+
+        function redraw() {
+            $(overlay).css({
+                'width': documentWidth + 'px',
+                'height': documentHeight + 'px'
+            });
+            $(dialog).css({
+                'left': $(document).scrollLeft() + ($(window).width() - settings.width) / 2 + "px",
+                'top': $(document).scrollTop() + ($(window).height() - settings.height) / 2 + "px"
+            });
+        }
+
 
         /**
          * [initialize description]
@@ -192,6 +203,10 @@
             $(window).resize();
 
             $(btnDismiss).appendTo(dialog.children('.action'));
+            if (settings.type == 'confirm') {
+                $(btnConfirm).appendTo(dialog.children('.action'));
+            }
+
 
             bindEvents();
 
