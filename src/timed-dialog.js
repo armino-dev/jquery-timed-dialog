@@ -27,7 +27,7 @@
 
 
         const supportsShadowDOMV1 = !!HTMLElement.prototype.attachShadow;
-        console.log(supportsShadowDOMV1);
+        console.log("Support for shadowDom: ", supportsShadowDOMV1);
 
 
         const body = document.body;
@@ -36,13 +36,25 @@
         var documentHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
         var documentWidth = Math.max(body.scrollWidth, body.offsetWidth, html.clientWidth, html.scrollWidth, html.offsetWidth);
 
-        console.log("Height: ", documentHeight, "Width: ",documentWidth);
 
-        const allowedTypes = ['info', 'confirmation'];
+        const allowedTypes = {
+            info: {
+                icon: {
+                    src:"i"
+                },
+                style: 'info',
+            },
+            confirmation: {
+                icon: {
+                    src:"?"
+                },
+                style: 'info',
+            }
+        };
         const allowedStyles = ['info', 'warning', 'danger'];
 
 
-
+        settings.icon = allowedTypes[settings.type].icon.src;
 
         const overlayCss = {
             'position': 'absolute',
@@ -70,21 +82,22 @@
         const dialog = $(`
                     <div id="${containerId}" class="timed-dialog">
                         <div class="header">
-                            <div class="header-icon">i</div>
+                            <div class="icon">${settings.icon}</div>
                             <h1 class="title">${settings.title}</h1>
-                            <button>x</button>
                         </div>
                         <div class="body">${settings.body}</div>
                         <div class="action"> </div>
                     </div>
             `);
 
-        var btnDismiss = $(`
+        const btnDismiss = $(`
             <button class="btn btn-primary" id="btn-dismiss-${random}">${settings.btnDismiss.text}</button>
         `);
-        var btnConfirm = $(`
+        const btnConfirm = $(`
             <button class="btn btn-primary" id="btn-confirm-${random}">${settings.btnConfirm.text}</button>
         `);
+
+        const btnClose = $(`<button id="button-close-${random}" class="btn btn-close">x</button>`);
 
         if (this.length > 1) {
             this.each(function() {
@@ -149,6 +162,10 @@
                 dismissDialog();
             });
 
+            $(btnClose).click( () => {
+                dismissDialog();
+            });
+
             $(btnConfirm).click( () => {
                 if (typeof settings.btnConfirm.action == 'function') {
                     try {
@@ -201,9 +218,9 @@
             $(dialog).css(dialogCss);
 
             $(window).resize();
-
+            $(btnClose).appendTo(dialog.children('div.header'));
             $(btnDismiss).appendTo(dialog.children('.action'));
-            if (settings.type == 'confirm') {
+            if (settings.type == 'confirmation') {
                 $(btnConfirm).appendTo(dialog.children('.action'));
             }
 
