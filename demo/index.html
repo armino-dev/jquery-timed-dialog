@@ -1,77 +1,192 @@
 <!doctype html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>jQuery Timed Dialog UI - Default functionality</title>    
-	<link rel="stylesheet" href="index.css">
-</head>
-<body>
-<div class="container">
-    <h1>Demo for jQuery Timed Dialog Plugin</h1>
-    <h2>Info dialog modal</h2>
-    <h3>Simple info dialog modal</h3>
-    <button id="my-button-info" type="button" name="button">Show info</button>
-    <h3>Info dialog modal with auto dismiss on timer</h3>
-    <button id="my-button-info-with-timer" type="button" name="button">Show info with timer</button>
-    <h2>Confirmation modal dialog</h2>
-    <h3>Simple confirmation modal</h3>
-    <button id="my-button-confirm" type="button" name="button">Show confirmation</button>
-    <h3>Confirmation modal with auto dismiss on timer</h3>
-    <button id="my-button-confirm-with-timer" type="button" name="button">Show confirmation with timer</button>
-    <h3>Complex confirmation modal</h3>
-    <button id="my-button-confirm-complex-with-timer" type="button" name="button">Show dialog with timer and custom action</button>
 
-</div>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQuery Timed Dialog UI - Default functionality</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism.css" />
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <h1>Demo for jQuery Timed Dialog Plugin</h1>
+    <div class="container">
+        <h2>1. Info dialog modal</h2>
+        <h3>1.1. Simple info dialog modal</h3>
+        <div class="">
+            <pre class="code">
+            <code class="language-javascript">
+            var options = {
+                type: &apos;info&apos;,
+                title: &apos;Info&apos;,
+                body: &apos;&lt;p&gt;This is a simple info modal. You can insert html markup also.&lt;/p&gt;',
+                width: 400,
+                height: 280,
+            };
+            $().timedDialog(options);
+            </code>
+            </pre>
+            <button id="my-button-info" type="button" name="button">Show info</button>
+        </div>
+
+        <h3>1.2. Info dialog modal with auto dismiss on timer</h3>
+        <div class="">
+            <pre class="code">
+            <code class="language-javascript">
+            var options = {
+                type: &apos;info&apos;,
+                title: &apos;Info&apos;,
+                body: &apos;&lt;p&gt;This is a simple info modal. You can insert html markup also.&lt;/p&gt;',
+                width: 400,
+                height: 280,
+                closeOnTimer: true,
+            };
+            $().timedDialog(options);
+            </code>
+            </pre>
+            <button id="my-button-info-with-timer" type="button" name="button">Show info with timer</button>
+        </div>
+        <h2>2. Confirmation modal dialog</h2>
+        <h3>2.1. Simple confirmation modal</h3>
+        <div class="">
+            <pre class="code">
+            <code class="language-javascript">
+            var myAction = () => {$(&apos;body&apos;).append('&lt;div&gt;I am an added div&lt;/div&gt;')};
+            var options = {
+                type: &apos;confirmation&apos;,
+                title: &apos;Confirmation&apos;,
+                body: &apos;&lt;p&gt;Are you sure you want to add a div to the DOM?&lt;/p&gt;&apos;,
+                width: 400,
+                height: 280,
+                btnConfirm: {text: &apos;Proceed&apos;, action: myAction()}
+            };
+            $().timedDialog(options);
+            </code>
+            </pre>
+            <button id="my-button-confirm" type="button" name="button">Show confirmation</button>
+        </div>
+
+        <h3>2.2. Confirmation modal with auto dismiss on timer</h3>
+        <div class="">
+            <pre class="code">
+            <code class="language-javascript">
+            var options = {
+                type: &apos;info&apos;,
+                title: &apos;Info&apos;,
+                body: &apos;&lt;p&gt;Are you sure you want to add a div to the DOM?&lt;/p&gt;&apos;,
+                width: 400,
+                height: 280,
+                closeOnTimer: true,
+                btnConfirm: {text: &apos;Proceed&apos;, action: myAction()}
+            };
+            $().timedDialog(options);
+            </code>
+            </pre>
+            <button id="my-button-confirm-with-timer" type="button" name="button">Show confirmation with timer</button>
+        </div>
+        <h3>2.3. Complex confirmation modal</h3>
+        <div class="">
+            <pre class="code">
+            <code class="language-javascript">
+            var options = {
+                type: &apos;info&apos;,
+                title: &apos;Info&apos;,
+                body: &apos;&lt;p&gt;Are you sure you want to add a div to the DOM?&lt;/p&gt;&apos;,
+                width: 400,
+                height: 280,
+                btnConfirm: {text: &apos;Proceed&apos;, action: myAction()}
+            };
+            $().timedDialog(options);
+            </code>
+            </pre>
+            <button id="my-button-confirm-complex-with-timer" type="button" name="button">Show dialog with timer and custom action</button>
+        </div>
+
+    </div>
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
 <script src="../src/timed-dialog.js"></script>
 <script type="text/javascript">
-
-        $(document).on('click', 'button', function() {
-            var options = {};
-            switch ($(this).attr('id')) {
-                case 'my-button-info':
-                    options = {
-                        type: 'info',
-                        title: 'Info',
-                        body: '<p>This is a simple info modal.</p><p>You can insert html markup also.</p>',
-                        width: 400,
-                        height: 280,
-                    };
+    $(document).on('click', 'button[id^="my-button-"]', function(evt) {
+        var options = {};
+        var myAction = () => {
+            const nearest = $(evt.target).closest('div').find('pre');
+            $('<div class="red">I am an added div</div>').insertBefore(nearest);
+        };
+        switch ($(this).attr('id')) {
+            case 'my-button-info':
+                options = {
+                    type: 'info',
+                    title: 'Info',
+                    body: '<p>This is a simple info modal. You can insert html markup also.</p>',
+                    width: 400,
+                    height: 280,
+                };
                 break;
-                case 'my-button-info-with-timer':
-                    options = {
-                        type: 'info',
-                        title: 'Info',
-                        body: '<p>This is an info modal with autoclose on timer.</p><p>You can insert html markup also.</p>',
-                        width: 400,
-                        height: 280,
-                        closeOnTimer: true,
-                    };
+            case 'my-button-info-with-timer':
+                options = {
+                    type: 'info',
+                    title: 'Info',
+                    body: '<p>This is an info modal with autoclose on timer. You can insert html markup also.</p>',
+                    width: 400,
+                    height: 280,
+                    closeOnTimer: true,
+                };
                 break;
-                case 'my-button-confirm':
-                    options = {
-                        type: 'confirm',
-                        title: 'Confirm action',
-                        body: '<p>A simple confirm modal dialog.</p>',
-                        width: 400,
-                        height: 280,
-                    }
+            case 'my-button-confirm':
+                options = {
+                    type: 'confirmation',
+                    title: 'Confirm action',
+                    body: '<p>Are you sure you want to add a div to the DOM?</p>',
+                    width: 400,
+                    height: 280,
+                    btnConfirm: {
+                        text: 'Proceed',
+                        action: () => {
+                            myAction();
+                    }}
+                }
                 break;
-                case 'my-button-confirm-with-timer':
-                    options = {}
+            case 'my-button-confirm-with-timer':
+                options = {
+                    type: 'confirmation',
+                    title: 'Confirm action',
+                    body: '<p>Are you sure you want to add a div to the DOM?</p>',
+                    width: 400,
+                    height: 280,
+                    closeOnTimer: true,
+                    timeout:20,
+                    btnConfirm: {
+                        text: 'Proceed',
+                        action: () => {
+                            myAction();
+                    }}
+                }
                 break;
-                case 'my-button-confirm-complex-with-timer':
-                    options = {}
+            case 'my-button-confirm-complex-with-timer':
+                options = {
+                    type: 'confirmation',
+                    title: 'Confirm action',
+                    body: '<p>Are you sure you want to add a div to the DOM?</p>',
+                    width: 400,
+                    height: 280,
+                    btnConfirm: {
+                        text: 'Proceed',
+                        action: () => {
+                            myAction();
+                    }}
+                }
                 break;
-            }
+        }
 
-            $(this).timedDialog(options);
+        $().timedDialog(options);
 
 
-        });
-
+    });
 </script>
+
 </html>
