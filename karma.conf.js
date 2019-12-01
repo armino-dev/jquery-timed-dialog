@@ -16,8 +16,8 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'demo/index.html',
-      'src/*.js',
-      'specs/*.js'
+      'src/**/*.js',
+      'specs/**/*.js'
     ],
 
 
@@ -29,6 +29,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+        'src/**/*.js': ['coverage']
     },
 
 
@@ -44,6 +45,7 @@ module.exports = function(config) {
         reporters: [
             {type: 'lcovonly', subdir: '.'},
             {type: 'json', subdir: '.'},
+            {type: 'html', subdir: '.'},
         ]
     },
 
