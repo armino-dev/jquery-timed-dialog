@@ -1,9 +1,14 @@
 language: node_js
 node_js:
     - 13
+install:
+    - npm install -g codecov
 addons:
     chrome: stable
-script: node_modules/karma/bin/karma start karma.conf.js --single-run
+script:
+    - node_modules/karma/bin/karma start karma.conf.js --single-run
+    - istanbul cover ./node_modules/jasmine/bin/jasmine.js
+    - codecov
 services:
     - xvfb
 before_install:
