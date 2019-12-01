@@ -140,19 +140,18 @@
             redraw();
         });
 
-        var autoCloseText = $(btnDismiss).html();
-        let counter = settings.timeout;
 
         /**
          * [autoClose description]
          * @return {[type]} [description]
          */
-        function autoClose() {
-            const timeout = setInterval(() => {
-                $(btnDismiss).children('span.text').html(autoCloseText + ` (${counter})`);
+        function autoClose(counter) {
+            let autoCloseText = $(btnDismiss).children('span.text').html();
+            $(btnDismiss).children('span.text').html(autoCloseText + ` (${counter})`);
+            let timeout = setInterval(() => {
                 counter--;
+                $(btnDismiss).children('span.text').html(autoCloseText + ` (${counter})`);
                 if (counter < 1) {
-                    counter = 0;
                     clearInterval(timeout);
                     $(btnDismiss).click();
                 }
@@ -256,7 +255,7 @@
 
             $(dialog).hide().fadeIn(300, () => {
                 if (settings.closeOnTimer) {
-                    autoClose();
+                    autoClose(settings.timeout);
                     if (settings.timeoutAnimation) {
                         animateTimeout();
                     }
