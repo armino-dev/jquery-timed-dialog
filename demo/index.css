@@ -20,6 +20,10 @@ body {
     margin-bottom:20px;
 }
 
+div.footer {
+    padding:20px 0;
+}
+
 button,
 [type="button"],
 [type="reset"],

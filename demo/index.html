@@ -10,7 +10,9 @@
 </head>
 
 <body>
-    <h1>Demo for jQuery Timed Dialog Plugin</h1>
+    <header>
+        <h1>Demo for jQuery Timed Dialog Plugin</h1>
+    </header>
     <div class="container">
         <h2>1. Info dialog modal</h2>
         <h3>1.1. Simple info dialog modal</h3>
@@ -78,6 +80,7 @@
                 width: 400,
                 height: 280,
                 closeOnTimer: true,
+                timeout:20,
                 btnConfirm: {text: &apos;Proceed&apos;, action: myAction()}
             };
             $().timedDialog(options);
@@ -102,9 +105,12 @@
             </pre>
             <button id="my-button-confirm-complex-with-timer" type="button" name="button">Show dialog with timer and custom action</button>
         </div>
-
     </div>
-
+    <footer>
+        <div class="footer">
+            Copyright &copy; 2019 Armino.
+        </div>
+    </footer>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/prism.min.js"></script>
@@ -115,7 +121,7 @@
         var options = {};
         var myAction = () => {
             const nearest = $(evt.target).closest('div').find('pre');
-            $('<div class="red">I am an added div</div>').insertBefore(nearest);
+            $('<div class="red">I am an added div</div>').insertBefore(nearest).hide().slideDown();
         };
         switch ($(this).attr('id')) {
             case 'my-button-info':
