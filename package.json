@@ -8,6 +8,7 @@
     "scripts": {
         "build": "webpack",
         "unit": "karma start karma.conf.js",
+        "report-coverage": "codecov",
         "test": "npm run unit",
         "scss": "node-sass scss -o css",
         "watch": "node-sass --watch scss -o css"
@@ -31,8 +32,6 @@
     },
     "devDependencies": {
         "codecov": "^3.6.1",
-        "istanbul": "^0.4.5",
-        "jasmine": "^3.5.0",
         "karma": "^4.4.1",
         "karma-chrome-launcher": "^3.1.0",
         "karma-jasmine": "^2.0.1",
