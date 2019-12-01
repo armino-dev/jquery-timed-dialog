@@ -72,8 +72,21 @@ button {
       background-color: #1055aa !important; }
       .timed-dialog .btn.btn-primary:hover {
         background-color: #3486ec !important; }
+    .timed-dialog .btn span.text {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      z-index: 10; }
+    .timed-dialog .btn span.meter {
+      position: absolute;
+      z-index: 9;
+      left: 0;
+      top: 0;
+      height: 100%;
+      background-color: rgba(52, 134, 236, 0.7) !important; }
     .timed-dialog .btn.btn-close {
       display: flex;
+      margin: 0;
       padding: 0;
       align-content: center;
       align-items: center;

@@ -10,6 +10,7 @@
             closeOnEscape: true,
             closeOnTimer: false,
             timeout: 10, //ten seconds default timeout
+            timeoutAnimation: true,
             isModal: true,
             btnDismiss: {
                 text: "Dismiss",
@@ -17,7 +18,9 @@
             },
             btnConfirm: {
                 text: "Confirm",
-                action: () => {return},
+                action: () => {
+                    return
+                },
                 class: '',
             }
         };
@@ -25,10 +28,8 @@
 
         var settings = $.extend({}, this.defaults, options);
 
-
         const supportsShadowDOMV1 = !!HTMLElement.prototype.attachShadow;
         console.log("Support for shadowDom: ", supportsShadowDOMV1);
-
 
         const body = document.body;
         const html = document.documentElement;
@@ -36,17 +37,16 @@
         var documentHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
         var documentWidth = Math.max(body.scrollWidth, body.offsetWidth, html.clientWidth, html.scrollWidth, html.offsetWidth);
 
-
         const allowedTypes = {
             info: {
                 icon: {
-                    src:"i"
+                    src: "i"
                 },
                 style: 'info',
             },
             confirmation: {
                 icon: {
-                    src:"?"
+                    src: "?"
                 },
                 style: 'info',
             }
@@ -91,7 +91,7 @@
             `);
 
         const btnDismiss = $(`
-            <button class="btn btn-primary" id="btn-dismiss-${random}">${settings.btnDismiss.text}</button>
+            <button class="btn btn-primary" style="position:relative;" id="btn-dismiss-${random}"><span class="text">${settings.btnDismiss.text}</span></button>
         `);
         const btnConfirm = $(`
             <button class="btn btn-primary" id="btn-confirm-${random}">${settings.btnConfirm.text}</button>
@@ -143,30 +143,36 @@
         var autoCloseText = $(btnDismiss).html();
         let counter = settings.timeout;
 
+        /**
+         * [autoClose description]
+         * @return {[type]} [description]
+         */
         function autoClose() {
-            if (settings.closeOnTimer) {
-                const timeout = setInterval(() => {
-                    $(btnDismiss).html(autoCloseText + ` (${counter})`);
-                    counter--;
-                    if (counter < 1) {
-                        counter = 0;
-                        clearInterval(timeout);
-                        $(btnDismiss).click();
-                    }
-                }, 1000);
-            }
+            const timeout = setInterval(() => {
+                $(btnDismiss).children('span.text').html(autoCloseText + ` (${counter})`);
+                counter--;
+                if (counter < 1) {
+                    counter = 0;
+                    clearInterval(timeout);
+                    $(btnDismiss).click();
+                }
+            }, 1000);
         }
 
+        /**
+         * [bindEvents description]
+         * @return {[type]} [description]
+         */
         function bindEvents() {
-            $(btnDismiss).click( () => {
+            $(btnDismiss).click(() => {
                 dismissDialog();
             });
 
-            $(btnClose).click( () => {
+            $(btnClose).click(() => {
                 dismissDialog();
             });
 
-            $(btnConfirm).click( () => {
+            $(btnConfirm).click(() => {
                 if (typeof settings.btnConfirm.action == 'function') {
                     try {
                         settings.btnConfirm.action();
@@ -179,7 +185,7 @@
                 }
             });
 
-            $(overlay).click( (evt) => {
+            $(overlay).click((evt) => {
                 // close only if target is not inside our dialogue
                 // or else the overlay will capture the clicks from
                 // our dialog elements, if any
@@ -189,6 +195,27 @@
             });
         }
 
+        /**
+         * [animateTimeout description]
+         * @return {[type]} [description]
+         */
+        function animateTimeout() {
+            let width = $(btnDismiss).width();
+            let meter = $('<span class="meter"></span>');
+            $(meter).appendTo(btnDismiss);
+            let timeDelta = 1000 * settings.timeout / width;
+            let timedWidth = width;
+            let interval = setInterval(() => {
+                $(meter).width(timedWidth);
+                timedWidth--;
+                if (timedWidth < 1) clearInterval(interval);
+            }, timeDelta);
+        }
+
+        /**
+         * [redraw description]
+         * @return {[type]} [description]
+         */
         function redraw() {
             $(overlay).css({
                 'width': documentWidth + 'px',
@@ -210,6 +237,7 @@
             if (isAlreadyOpen) return;
 
             $('body').append(overlay);
+
             if (settings.isModal) {
                 overlay.css(overlayCss);
             }
@@ -224,13 +252,16 @@
                 $(btnConfirm).appendTo(dialog.children('.action'));
             }
 
-
             bindEvents();
 
-            $(dialog).hide().fadeIn( 300, autoClose());
-
-
-
+            $(dialog).hide().fadeIn(300, () => {
+                if (settings.closeOnTimer) {
+                    autoClose();
+                    if (settings.timeoutAnimation) {
+                        animateTimeout();
+                    }
+                }
+            });
 
 
             return this;
