@@ -167,6 +167,16 @@
                 dismissDialog();
             });
 
+            $(btnDismiss).on('mouseenter', () => {
+                let meter = $('span.meter');
+                meter.addClass('hover');
+            });
+
+            $(btnDismiss).on('mouseleave', () => {
+                let meter = $('span.meter');
+                meter.removeClass('hover');
+            });
+
             $(btnClose).click(() => {
                 dismissDialog();
             });
