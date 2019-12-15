@@ -1,7 +1,7 @@
 // Karma configuration
 // Generated on Tue Nov 26 2019 10:03:48 GMT+0200 (Eastern European Standard Time)
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -16,6 +16,8 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'demo/index.html',
+      'demo/index.css',
+      'css/timed-dialog.css',
       'src/**/*.js',
       'specs/**/*.js'
     ],
@@ -29,7 +31,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-        'src/**/*.js': ['coverage']
+      'src/**/*.js': ['coverage']
     },
 
 
@@ -37,16 +39,16 @@ module.exports = function(config) {
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
     reporters: [
-        'progress',
-        'coverage'
+      'progress',
+      'coverage'
     ],
 
     coverageReporter: {
-        reporters: [
-            {type: 'lcovonly', subdir: '.'},
-            {type: 'json', subdir: '.'},
-            {type: 'html', subdir: '.'},
-        ]
+      reporters: [
+        { type: 'lcovonly', subdir: '.' },
+        { type: 'json', subdir: '.' },
+        { type: 'html', subdir: '.' },
+      ]
     },
 
     // web server port

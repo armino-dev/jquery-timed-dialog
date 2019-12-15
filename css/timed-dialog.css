@@ -83,7 +83,9 @@ button {
       left: 0;
       top: 0;
       height: 100%;
-      background-color: rgba(52, 134, 236, 0.7) !important; }
+      background-color: rgba(52, 134, 236, 0.7); }
+      .timed-dialog .btn span.meter.hover {
+        background-color: rgba(7, 38, 77, 0.7) !important; }
     .timed-dialog .btn.btn-close {
       display: flex;
       margin: 0;

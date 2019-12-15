@@ -1,5 +1,5 @@
-(function($) {
-    $.fn.timedDialog = function(options) {
+(function ($) {
+    $.fn.timedDialog = function (options) {
         this.defaults = {
             type: 'info',
             title: 'Info',
@@ -26,7 +26,7 @@
         };
 
 
-        var settings = $.extend({}, this.defaults, options);
+        let settings = $.extend({}, this.defaults, options);
 
         const supportsShadowDOMV1 = !!HTMLElement.prototype.attachShadow;
         console.log("Support for shadowDom: ", supportsShadowDOMV1);
@@ -90,17 +90,24 @@
                     </div>
             `);
 
-        const btnDismiss = $(`
-            <button class="btn btn-primary" style="position:relative;" id="btn-dismiss-${random}"><span class="text">${settings.btnDismiss.text}</span></button>
+        const btnDismiss = $(`<button 
+            class="btn btn-primary" 
+            style="position:relative;" 
+            id="btn-dismiss-${random}">
+                <span class="text">${settings.btnDismiss.text}</span>
+            </button>
         `);
-        const btnConfirm = $(`
-            <button class="btn btn-primary" id="btn-confirm-${random}">${settings.btnConfirm.text}</button>
+        const btnConfirm = $(`<button 
+            class="btn btn-primary" 
+            id="btn-confirm-${random}">
+                ${settings.btnConfirm.text}
+            </button>
         `);
 
-        const btnClose = $(`<button id="button-close-${random}" class="btn btn-close">x</button>`);
+        const btnClose = $(`<button id="btn-close-${random}" class="btn btn-close">x</button>`);
 
         if (this.length > 1) {
-            this.each(function() {
+            this.each(function () {
                 $(this).timedDialog(options);
             });
 
@@ -129,7 +136,7 @@
             $(dialog).fadeOut();
             $(overlay).fadeOut(500, () => {
                 $(overlay).remove();
-            });
+            });                     
         }
 
         $(window).resize(() => {
@@ -236,6 +243,7 @@
             });
         }
 
+        this.random = random;
 
         /**
          * [initialize description]
