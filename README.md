@@ -8,7 +8,9 @@ A jquery plugin for creating a timed modal dialog
 * Not suitable for use just yet.
 
 
+## Demo
 
+Demo can be viewed on [here](https://armino-dev.github.io/jquery-timed-dialog/demo/)
 
 
 ## Contributing
