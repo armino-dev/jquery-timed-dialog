@@ -1,10 +1,6 @@
-env:
-    global:
-        - MOZ_HEADLESS=1
 dist: bionic
 os:
     - linux
-    - osx
 language: node_js
 node_js:
     - 13
@@ -12,9 +8,8 @@ install:
     - npm install -g codecov
 addons:
     chrome: stable
-    firefox: latest
 script:
-    - node_modules/karma/bin/karma start karma.conf.js --single-run
+    - node_modules/karma/bin/karma start karma.conf.js
     - codecov
 services:
     - xvfb
