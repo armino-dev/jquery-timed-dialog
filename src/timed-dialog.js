@@ -25,7 +25,6 @@
             }
         };
 
-
         let settings = $.extend({}, this.defaults, options);
 
         const supportsShadowDOMV1 = !!HTMLElement.prototype.attachShadow;
@@ -34,8 +33,11 @@
         const body = document.body;
         const html = document.documentElement;
 
-        var documentHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
-        var documentWidth = Math.max(body.scrollWidth, body.offsetWidth, html.clientWidth, html.scrollWidth, html.offsetWidth);
+        const heights = [body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight];
+        const widths = [body.scrollWidth, body.offsetWidth, html.clientWidth, html.scrollWidth, html.offsetWidth];
+
+        const documentHeight = Math.max(heights);
+        const documentWidth = Math.max(widths);
 
         const allowedTypes = {
             info: {
@@ -51,8 +53,8 @@
                 style: 'info',
             }
         };
-        const allowedStyles = ['info', 'warning', 'danger'];
 
+        const allowedStyles = ['info', 'warning', 'danger'];
 
         settings.icon = allowedTypes[settings.type].icon.src;
 
@@ -64,6 +66,7 @@
             'height': documentHeight + 'px',
             'z-index': '2000',
         };
+
         const dialogCss = {
             'position': 'absolute',
             'width': (settings.width + 'px'),
@@ -71,7 +74,6 @@
             'line-height': '20px',
             'z-index': '2001',
         };
-
 
         const random = randomString(5);
 
@@ -97,6 +99,7 @@
                 <span class="text">${settings.btnDismiss.text}</span>
             </button>
         `);
+
         const btnConfirm = $(`<button 
             class="btn btn-primary" 
             id="btn-confirm-${random}">
@@ -120,7 +123,7 @@
          * @return string
          */
         function randomString(length) {
-            var text = "";
+            let text = "";
             const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             for (let i = 0; i < length; i++) {
                 text += possible.charAt(Math.floor(Math.random() * possible.length));
@@ -139,14 +142,13 @@
             });                     
         }
 
-        $(window).resize(() => {
+        $(window).on('resize', () => {
             redraw();
         });
 
-        $(document).scroll(() => {
+        $(document).on('scroll', () => {
             redraw();
         });
-
 
         /**
          * [autoClose description]
@@ -170,7 +172,7 @@
          * @return {[type]} [description]
          */
         function bindEvents() {
-            $(btnDismiss).click(() => {
+            $(btnDismiss).on('click', () => {
                 dismissDialog();
             });
 
@@ -184,16 +186,16 @@
                 meter.removeClass('hover');
             });
 
-            $(btnClose).click(() => {
+            $(btnClose).on('click', () => {
                 dismissDialog();
             });
 
-            $(btnConfirm).click(() => {
+            $(btnConfirm).on('click', () => {
                 if (typeof settings.btnConfirm.action == 'function') {
                     try {
                         settings.btnConfirm.action();
                     } catch (e) {
-                        console.log('')
+                        console.error(e)
                     }
                     dismissDialog();
                 } else {
@@ -201,7 +203,7 @@
                 }
             });
 
-            $(overlay).click((evt) => {
+            $(overlay).on('click', (evt) => {
                 // close only if target is not inside our dialogue
                 // or else the overlay will capture the clicks from
                 // our dialog elements, if any
@@ -216,12 +218,12 @@
          * @return {[type]} [description]
          */
         function animateTimeout() {
-            let width = $(btnDismiss).width();
-            let meter = $('<span class="meter"></span>');
+            const width = $(btnDismiss).width();
+            const meter = $('<span class="meter"></span>');
             $(meter).appendTo(btnDismiss);
-            let timeDelta = 1000 * settings.timeout / width;
+            const timeDelta = 1000 * settings.timeout / width;
             let timedWidth = width;
-            let interval = setInterval(() => {
+            const interval = setInterval(() => {
                 $(meter).width(timedWidth);
                 timedWidth--;
                 if (timedWidth < 1) clearInterval(interval);
@@ -262,7 +264,7 @@
             $(dialog).appendTo(overlay);
             $(dialog).css(dialogCss);
 
-            $(window).resize();
+            $(window).trigger('resize');
             $(btnClose).appendTo(dialog.children('div.header'));
             $(btnDismiss).appendTo(dialog.children('.action'));
             if (settings.type == 'confirmation') {
@@ -279,7 +281,6 @@
                     }
                 }
             });
-
 
             return this;
         }

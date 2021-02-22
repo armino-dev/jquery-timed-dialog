@@ -65,7 +65,7 @@ describe("jQuery Timed Dialog Plugin", () => {
             const random = dialog.random;
     
             let btnDismiss = $(document.querySelector(`#btn-dismiss-${random}`));
-            btnDismiss.click();
+            btnDismiss.trigger('click');
     
             setTimeout(() => {
                 expect($(`#timed-dialog-${random}`).length).toBeLessThan(1);
@@ -79,7 +79,7 @@ describe("jQuery Timed Dialog Plugin", () => {
 
             let btnClose = $(document.querySelector(`#btn-close-${random}`));
             
-            btnClose.click();
+            btnClose.trigger('click');
     
             setTimeout(() => {
                 expect($(`#timed-dialog-${random}`).length).toBeLessThan(1);
@@ -103,7 +103,7 @@ describe("jQuery Timed Dialog Plugin", () => {
           
             expect(btnConfirm.text().trim()).toBe('Proceed'); 
 
-            btnConfirm.click();
+            btnConfirm.trigger('click');
 
             setTimeout( () => {
                 expect(document.querySelectorAll('div.red').length).toBeGreaterThan(0);
