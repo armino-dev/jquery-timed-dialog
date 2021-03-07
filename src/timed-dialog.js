@@ -56,6 +56,8 @@
 
         const allowedStyles = ['info', 'warning', 'danger'];
 
+        let animationRequestId = 0;
+
         settings.icon = allowedTypes[settings.type].icon.src;
 
         const overlayCss = {
@@ -131,15 +133,15 @@
             return text;
         }
 
-        /**
-         * [dismissDialog description]
-         * @return {[type]} [description]
-         */
         function dismissDialog() {
+            if (animationRequestId) {
+                window.cancelAnimationFrame(animationRequestId);
+            }
+
             $(dialog).fadeOut();
             $(overlay).fadeOut(500, () => {
                 $(overlay).remove();
-            });                     
+            });
         }
 
         $(window).on('resize', () => {
@@ -150,10 +152,6 @@
             redraw();
         });
 
-        /**
-         * [autoClose description]
-         * @return {[type]} [description]
-         */
         function autoClose(counter) {
             let autoCloseText = $(btnDismiss).children('span.text').html();
             $(btnDismiss).children('span.text').html(autoCloseText + ` (${counter})`);
@@ -162,15 +160,11 @@
                 $(btnDismiss).children('span.text').html(autoCloseText + ` (${counter})`);
                 if (counter < 1) {
                     clearInterval(timeout);
-                    $(btnDismiss).click();
+                    $(btnDismiss).trigger('click');
                 }
             }, 1000);
         }
 
-        /**
-         * [bindEvents description]
-         * @return {[type]} [description]
-         */
         function bindEvents() {
             $(btnDismiss).on('click', () => {
                 dismissDialog();
@@ -213,27 +207,32 @@
             });
         }
 
-        /**
-         * [animateTimeout description]
-         * @return {[type]} [description]
-         */
         function animateTimeout() {
             const width = $(btnDismiss).width();
             const meter = $('<span class="meter"></span>');
             $(meter).appendTo(btnDismiss);
-            const timeDelta = 1000 * settings.timeout / width;
+            const timeDelta = 1000 * settings.timeout;
             let timedWidth = width;
-            const interval = setInterval(() => {
+            let start;
+
+            const draw = (timestamp) => {
+                if (start === undefined) {
+                    start = timestamp;
+                }
+                const elapsed = timestamp - start;
+
                 $(meter).width(timedWidth);
-                timedWidth--;
-                if (timedWidth < 1) clearInterval(interval);
-            }, timeDelta);
+
+                timedWidth = width * (1 - elapsed / timeDelta);
+
+                if (elapsed < timeDelta) {
+                    animationRequestId = window.requestAnimationFrame(draw);
+                }
+            }
+
+            animationRequestId = window.requestAnimationFrame(draw);
         }
 
-        /**
-         * [redraw description]
-         * @return {[type]} [description]
-         */
         function redraw() {
             $(overlay).css({
                 'width': documentWidth + 'px',
@@ -247,10 +246,6 @@
 
         this.random = random;
 
-        /**
-         * [initialize description]
-         * @return {[type]} [description]
-         */
         this.initialize = () => {
             const isAlreadyOpen = $('.timed-dialog-overlay').length;
             if (isAlreadyOpen) return;
