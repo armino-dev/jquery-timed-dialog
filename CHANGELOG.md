@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## 2021-03-07
+    - replaced `setTimeout` and `setInterval` with `window.requestAnimationFrame` in button animation for improved performance
+
 ## 2019-12-01
     - Happy Birthday Romania!
     - added animation to dismiss button

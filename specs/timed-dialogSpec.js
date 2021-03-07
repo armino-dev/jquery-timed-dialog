@@ -112,6 +112,20 @@ describe("jQuery Timed Dialog Plugin", () => {
             }, 600);     
 
         });
+
+        it("If timeout specified on info dialog it should close automatically after timeout", (done) => {
+            options.timeout = 3;
+            options.closeOnTimer = true;
+
+            let dialog = $().timedDialog(options);
+            const random = dialog.random;
+
+            setTimeout( () => {
+                expect($(`#timed-dialog-${random}`).length).toBeLessThan(1);
+                done();
+            }, 4 * 1000);
+
+        });
     }); 
 
     
