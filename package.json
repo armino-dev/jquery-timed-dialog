@@ -28,7 +28,7 @@
     },
     "dependencies": {
         "jquery": ">=1.7.0 <4.0.0",
-        "node-sass": "^5.0.0"
+        "node-sass": "^6.0.0"
     },
     "devDependencies": {
         "codecov": "^3.6.1",
