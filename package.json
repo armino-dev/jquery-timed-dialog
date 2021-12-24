@@ -1,5 +1,5 @@
 {
-    "name": "jquery-timed-dialog",
+    "name": "@armino-dev/jquery-timed-dialog",
     "title": "jQuery Timed Dialog",
     "version": "1.0.0",
     "description": "A jQuery timed dialog UI",
