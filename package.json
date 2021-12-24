@@ -7,7 +7,7 @@
     "main": "dist/timed-dialog.min.js",
     "scripts": {
         "build": "webpack",
-        "unit": "karma start karma.conf.js",
+        "unit": "karma start karma.conf.js --single-run",
         "report-coverage": "codecov",
         "test": "npm run unit",
         "scss": "node-sass scss -o css",
