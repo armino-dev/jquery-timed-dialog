@@ -1,13 +1,13 @@
 {
     "name": "@armino-dev/jquery-timed-dialog",
     "title": "jQuery Timed Dialog",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "A jQuery timed dialog UI",
     "homepage": "https://github.com/armino-dev/jquery-timed-dialog#readme",
     "main": "dist/timed-dialog.min.js",
     "scripts": {
         "build": "webpack",
-        "unit": "karma start karma.conf.js --single-run",
+        "unit": "karma start karma.conf.js",
         "report-coverage": "codecov",
         "test": "npm run unit",
         "scss": "node-sass scss -o css",
