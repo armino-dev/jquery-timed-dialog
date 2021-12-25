@@ -27,9 +27,6 @@
 
         let settings = $.extend({}, this.defaults, options);
 
-        const supportsShadowDOMV1 = !!HTMLElement.prototype.attachShadow;
-        console.log("Support for shadowDom: ", supportsShadowDOMV1);
-
         const body = document.body;
         const html = document.documentElement;
 
