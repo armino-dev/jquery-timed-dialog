@@ -33,8 +33,8 @@
         const heights = [body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight];
         const widths = [body.scrollWidth, body.offsetWidth, html.clientWidth, html.scrollWidth, html.offsetWidth];
 
-        const documentHeight = Math.max(heights);
-        const documentWidth = Math.max(widths);
+        const documentHeight = Math.max(...heights);
+        const documentWidth = Math.max(...widths);
 
         const allowedTypes = {
             info: {
