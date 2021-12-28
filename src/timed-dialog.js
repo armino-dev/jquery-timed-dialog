@@ -83,7 +83,7 @@
         const dialog = $(`
                     <div id="${containerId}" class="timed-dialog">
                         <div class="header">
-                            <div class="icon">${settings.icon}</div>
+                            <div class="icon"><span>${settings.icon}</span></div>
                             <h1 class="title">${settings.title}</h1>
                         </div>
                         <div class="body">${settings.body}</div>
