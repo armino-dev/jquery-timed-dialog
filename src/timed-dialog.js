@@ -33,8 +33,8 @@
         const heights = [body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight];
         const widths = [body.scrollWidth, body.offsetWidth, html.clientWidth, html.scrollWidth, html.offsetWidth];
 
-        const documentHeight = Math.max(heights);
-        const documentWidth = Math.max(widths);
+        const documentHeight = Math.max(...heights);
+        const documentWidth = Math.max(...widths);
 
         const allowedTypes = {
             info: {
@@ -83,7 +83,7 @@
         const dialog = $(`
                     <div id="${containerId}" class="timed-dialog">
                         <div class="header">
-                            <div class="icon">${settings.icon}</div>
+                            <div class="icon"><span>${settings.icon}</span></div>
                             <h1 class="title">${settings.title}</h1>
                         </div>
                         <div class="body">${settings.body}</div>
