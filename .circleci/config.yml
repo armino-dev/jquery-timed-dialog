@@ -8,7 +8,9 @@ jobs:
       - image: cimg/node:15.1-browsers
     steps:
       - checkout
-      - node/install-packages
+      - run:
+          name: Install packages
+          command: npm install
       - run:
           name: Run tests
           command: npm test
