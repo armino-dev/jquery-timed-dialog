@@ -6,12 +6,14 @@
     "homepage": "https://github.com/armino-dev/jquery-timed-dialog#readme",
     "main": "dist/timed-dialog.min.js",
     "scripts": {
-        "build": "webpack",
+        "build": "npm run prod",
         "unit": "karma start karma.conf.js",
         "report-coverage": "codecov",
         "test": "npm run unit",
-        "scss": "node-sass scss -o css",
-        "watch": "node-sass --watch scss -o css"
+        "scss": "dart-sass scss:css/",
+        "watch": "dart-sass --watch scss:css/",
+        "dev": "webpack --mode development && dart-sass scss:css/ --no-source-map",
+        "prod": "webpack --mode production && dart-sass scss:css/ --style=compressed --no-source-map"
     },
     "repository": {
         "type": "git",
@@ -19,6 +21,7 @@
     },
     "keywords": [
         "jQuery",
+        "jQuery Timed Dialog",
         "Dialog",
         "UI"
     ],
@@ -31,13 +34,13 @@
     },
     "devDependencies": {
         "codecov": "^3.8.2",
+        "dart-sass": "^1.25.0",
         "karma": "^6.3.20",
         "karma-chrome-launcher": "^3.1.1",
         "karma-coverage": "^2.2.0",
         "karma-jasmine": "^5.0.1",
         "mini-css-extract-plugin": "^2.6.0",
-        "node-sass": "^7.0.1",
-        "puppeteer": "^14.1.0",
+        "puppeteer": "^14.1.1",
         "webpack": "^5.72.1",
         "webpack-cli": "^4.9.2"
     },
