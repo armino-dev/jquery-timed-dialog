@@ -5,8 +5,6 @@
 A jquery plugin for creating a timed modal dialog
 
 * Under development
-* Not suitable for use just yet.
-
 
 ## Demo
 
