@@ -40,7 +40,7 @@
         "karma-coverage": "^2.2.0",
         "karma-jasmine": "^5.0.1",
         "mini-css-extract-plugin": "^2.6.0",
-        "puppeteer": "^14.1.1",
+        "puppeteer": "^15.1.1",
         "webpack": "^5.72.1",
         "webpack-cli": "^4.9.2"
     },
