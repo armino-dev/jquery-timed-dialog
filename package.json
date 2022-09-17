@@ -30,7 +30,7 @@
         "url": "https://github.com/armino-dev/jquery-timed-dialog"
     },
     "dependencies": {
-        "jquery": "^3.6.0"
+        "jquery": "^3.6.1"
     },
     "devDependencies": {
         "codecov": "^3.8.2",
