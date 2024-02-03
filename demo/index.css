@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Noto+Serif:400,700&display=swap');
-@import "../dist/css/timed-dialog.min.css";
+@import "../dist/timed-dialog.min.css";
 
 body {
     font-family: 'Noto Serif', serif;
