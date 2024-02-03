@@ -63,10 +63,9 @@ describe("jQuery Timed Dialog Plugin", () => {
         it("Should close on dialog btnDismiss click", (done) => {
             let dialog = $().timedDialog(options);
             const random = dialog.random;
-    
-            let btnDismiss = $(document.querySelector(`#btn-dismiss-${random}`));
-            btnDismiss.trigger('click');
-    
+            
+            let btnDismiss = document.querySelector(`#btn-dismiss-${random}`);
+            btnDismiss.click();
             setTimeout(() => {
                 expect($(`#timed-dialog-${random}`).length).toBeLessThan(1);
                 done();

@@ -17,9 +17,7 @@ module.exports = function (config) {
     // list of files / patterns to load in the browser
     files: [
       'https://code.jquery.com/jquery-3.4.1.min.js',
-      'demo/index.html',
-      'demo/index.css',
-      'css/timed-dialog.css',
+      'dist/css/timed-dialog.min.css',
       'src/**/*.js',
       'specs/**/*.js'
     ],
