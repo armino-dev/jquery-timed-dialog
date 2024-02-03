@@ -202,6 +202,14 @@
                     dismissDialog();
                 }
             });
+
+            $(document).on('keydown', (evt) => {
+                if (settings.closeOnEscape) {
+                    if (evt.key === 'Escape') {
+                        dismissDialog();
+                    }
+                }
+            });
         }
 
         function animateTimeout() {
