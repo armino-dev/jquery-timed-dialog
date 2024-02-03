@@ -3,7 +3,8 @@
     "github": {
         "release": true,
         "releaseName": "v%s",
-        "preRelease": false
+        "preRelease": false,
+        "tokenRef": "NPM_TOKEN"
     },
     "src": {
         "commitMessage": "Release v%s",
