@@ -242,6 +242,9 @@
         }
 
         this.random = random;
+        this.overlay = overlay;
+        this.dialog = dialog;
+        this.dismissDialog = dismissDialog;
 
         this.initialize = () => {
             const isAlreadyOpen = $('.timed-dialog-overlay').length;
