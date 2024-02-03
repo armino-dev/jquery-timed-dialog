@@ -56,7 +56,42 @@ describe("jQuery Timed Dialog Plugin", () => {
         it("Should be only one dialog", () => {
             expect(dialogsCount).toBe(1);
         });
-       
+
+        it ("Should close on escape key", (done) => {
+            let dialog = $().timedDialog(options);
+            const random = dialog.random;
+            let event = new KeyboardEvent('keydown', {key: 'Escape'});
+            document.dispatchEvent(event);
+            setTimeout(() => {
+                expect($(`#timed-dialog-${random}`).length).toBeLessThan(1);
+                done();
+            }, 600);
+        });
+
+        it ("Should close on overlay click", (done) => {
+            let dialog = $().timedDialog(options);
+            const random = dialog.random;
+            let overlay = document.querySelector(`#overlay-timed-dialog-${random}`);
+            overlay.click();
+            setTimeout(() => {
+                expect($(`#timed-dialog-${random}`).length).toBeLessThan(1);
+                done();
+            }, 600);
+        });
+
+        it ("Should contain a title", () => {
+            let dialog = $().timedDialog(options);
+            const random = dialog.random;
+            let title = $(`#timed-dialog-${random} h1.title`);
+            expect(title.text()).toBe('Test');
+        });
+
+        it ("Should contain a body", () => {
+            let dialog = $().timedDialog(options);
+            const random = dialog.random;
+            let body = $(`#timed-dialog-${random} div.body`);
+            expect(body.text()).toBe('Testing the dialog');
+        });
     });
 
     describe ("Buttons interactions", () => {
