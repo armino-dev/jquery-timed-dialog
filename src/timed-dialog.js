@@ -51,7 +51,7 @@
             }
         };
 
-        const allowedStyles = ['info', 'warning', 'danger'];
+        // const allowedStyles = ['info', 'warning', 'danger'];
 
         let animationRequestId = 0;
 

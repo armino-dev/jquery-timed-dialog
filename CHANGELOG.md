@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## 2024-02-03
+    - change build system from webpack to esbuild
+    - add eslint
+    - add css to dist
+
 ## 2021-12-24
     - added the workflow for publishing to npmjs package registry
     - Merry Christmas to everyone!
