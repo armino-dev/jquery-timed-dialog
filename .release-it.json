@@ -2,14 +2,13 @@
     "verbose": true,
     "github": {
         "release": true,
-        "releaseName": "v%s",
-        "preRelease": false,
-        "tokenRef": "NPM_TOKEN"
+        "releaseName": "v${version}",
+        "preRelease": false
     },
     "src": {
-        "commitMessage": "Release v%s",
-        "tagName": "v%s",
-        "tagAnnotation": "JQuery Timed Dialog Release v%s",
+        "commitMessage": "Release v${version}",
+        "tagName": "v${version}",
+        "tagAnnotation": "JQuery Timed Dialog Release v${version}",
         "afterReleaseCommand": "echo Successfully released JQuery Timed Dialog v${version}."
     },
     "npm": {
