@@ -27,14 +27,7 @@
 
         let settings = $.extend({}, this.defaults, options);
 
-        const body = document.body;
-        const html = document.documentElement;
-
-        const heights = [body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight];
-        const widths = [body.scrollWidth, body.offsetWidth, html.clientWidth, html.scrollWidth, html.offsetWidth];
-
-        const documentHeight = Math.max(...heights);
-        const documentWidth = Math.max(...widths);
+        const { documentHeight, documentWidth } = getDocumentDimensions();
 
         const allowedTypes = {
             info: {
@@ -114,6 +107,19 @@
             });
 
             return this;
+        }
+
+        function getDocumentDimensions() {
+            const body = document.body;
+            const html = document.documentElement;
+
+            const heights = [body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight];
+            const widths = [body.scrollWidth, body.offsetWidth, html.clientWidth, html.scrollWidth, html.offsetWidth];
+
+            const documentHeight = Math.max(...heights);
+            const documentWidth = Math.max(...widths);
+
+            return { documentHeight, documentWidth };
         }
 
         /**
@@ -239,6 +245,7 @@
         }
 
         function redraw() {
+            const { documentHeight, documentWidth } = getDocumentDimensions();
             $(overlay).css({
                 'width': documentWidth + 'px',
                 'height': documentHeight + 'px'

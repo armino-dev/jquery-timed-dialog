@@ -3,17 +3,29 @@
  * Author: Armino Popp, <devel@boioiong.com>
  */
 
+$dialog-bg-color: #fff;
+$header-bg-color: #1055aa;
+$header-text-color: #fff;
+$btn-text-color: #fff;
+$btn-bg-color: #555;
+
+$default-padding: 10px;
+
+$dialog-bg-color-dark: #333;
+$header-bg-color-dark: #1a3b64;
+$header-text-color-dark: #ddd;
+$btn-text-color-dark: #fff;
+$btn-bg-color-dark: #555;
+
 .timed-dialog-overlay {
     background-color: rgba(155,155,155,0.8);
 }
-$dialog-bg-color: #fff;
-$header-bg-color: #1055aa;
-$default-padding: 10px;
 
 [type="button"],
 [type="reset"],
 [type="submit"],
 button {
+    appearance: button;
     -webkit-appearance: button;
     padding: 0;
 }
@@ -38,7 +50,7 @@ button {
         align-items: center;
 
         background-color: $header-bg-color;
-        color: white;
+        color: $header-text-color;
         padding: 5px 10px;
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
@@ -84,8 +96,8 @@ button {
         border: 0;
         padding: 10px;
         line-height: 16px;
-        color: white;
-        background-color: #555;
+        color: $btn-text-color;
+        background-color: $btn-bg-color;
         margin-right: 10px;
         &:last-child {margin-right:0;}
         &.btn-primary {
@@ -124,8 +136,8 @@ button {
             width:24px;
             height:24px;
             background-color: transparent;
-            color:white;
-            border:2px solid white;
+            color: $btn-text-color;
+            border:2px solid $btn-text-color;
             border-radius: 100%;
             &:hover {
                 background-color: rgba(lighten($header-bg-color, 20), .7) !important;
@@ -134,8 +146,65 @@ button {
         }
 
         &:hover {
-            background-color: #aaa;
-            color: white;
+            background-color: rgba(lighten($btn-bg-color, 20), 1);
+            color: $btn-text-color;
+        }
+    }
+}
+
+
+@media only screen and (min-width: 40em) {
+
+}
+
+@media (prefers-color-scheme: dark) {
+    .timed-dialog-overlay {
+        background-color: rgba(55,55,55,0.8);
+    }
+    .timed-dialog {
+        .action,
+        .body {
+            background-color: $dialog-bg-color-dark;
+            color: $header-text-color-dark;
+        }
+        .header {
+            background-color: $header-bg-color-dark;
+            color: $header-text-color-dark;
+            .icon {
+                background-color: $header-text-color-dark;
+                color: $header-bg-color-dark;
+            }
+        }
+        .btn {
+            color: $btn-text-color-dark;
+            background-color: $btn-bg-color-dark;
+            &.btn-primary {
+                background-color: $header-bg-color-dark !important;
+                &:hover {
+                    background-color: lighten($header-bg-color-dark, 20) !important;
+                }
+            }
+
+            span.meter {
+                background-color:rgba(lighten($header-bg-color-dark, 20), .7);
+                &.hover {
+                    background-color:rgba(darken($header-bg-color-dark, 20), .7) !important;
+                }
+            }
+
+            &.btn-close {
+                background-color: transparent;
+                color: $btn-text-color-dark;
+                border:2px solid $btn-text-color-dark;
+                &:hover {
+                    background-color: rgba(lighten($header-bg-color-dark, 20), .7) !important;
+                }
+            }
+
+            &:hover {
+                background-color: rgba(lighten($btn-bg-color-dark, 20), 1);
+                color: $btn-text-color-dark;
+            }
         }
     }
 }

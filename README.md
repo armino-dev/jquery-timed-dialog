@@ -41,7 +41,7 @@ import '@armino-dev/jquery-timed-dialog/dist/timed-dialog.min.css';
 ### Directly into your html from cdn
 ```html
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://esm.sh/@armino-dev/jquery-timed-dialog"></script>
+<script src="https://esm.sh/@armino-dev/jquery-timed-dialog/dist/timed-dialog.min.js"></script>
 <link rel="stylesheet" href="https://esm.sh/@armino-dev/jquery-timed-dialog/dist/timed-dialog.min.css" />
 ```
 
