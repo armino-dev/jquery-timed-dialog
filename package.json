@@ -40,6 +40,7 @@
     "esbuild": "^0.19.9",
     "esbuild-sass-plugin": "^2.16.1",
     "eslint": "^8.53.0",
+    "eslint-config-jquery": "^3.0.2",
     "eslint-plugin-jquery": "^1.5.1",
     "karma": "^6.3.20",
     "karma-chrome-launcher": "^3.1.1",

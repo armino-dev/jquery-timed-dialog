@@ -5,7 +5,7 @@ module.exports = {
         jquery: true,
     },
     root: true,
-    extends: ['eslint:recommended'],
+    extends: ['jquery', 'eslint:recommended'],
     globals: {
         Atomics: 'readonly',
         SharedArrayBuffer: 'readonly',
