@@ -158,10 +158,6 @@ describe("jQuery Timed Dialog Plugin", () => {
                 expect($(`#timed-dialog-${random}`).length).toBeLessThan(1);
                 done();
             }, 4 * 1000);
-
         });
     }); 
-
-    
-
 });

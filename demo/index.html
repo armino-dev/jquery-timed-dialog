@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>jQuery Timed Dialog UI - Default functionality</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css" />
+    <link rel="stylesheet" href="https://esm.sh/@armino-dev/comparing-slider/dist/comparing-slider.min.css" />
     <link rel="stylesheet" href="index.css?v=4b9b7fec8e7e576e559d5203298a48ad">
 </head>
 
@@ -21,20 +22,7 @@
             It also supports <strong>light/dark</strong> theming based on your device settings.</p>
     </section>
     <section id="hero">
-        <div class="layer bottom">
-            <div class="content-wrap">
-                <img src="images/jquery-timed-dialog-ui-dark.png" alt="jQuery timed dialog dark" />
-            </div>
-        </div>
-        <div class="layer top">
-            <div class="content-wrap">
-                <img src="images/jquery-timed-dialog-ui-light.png" alt="jQuery timed dialog light" />
-            </div>
-        </div>
-        <div class="handle">
-            <div class="line"></div>
-            <div class="arrows"></div>
-        </div>
+        <div id="hero-container"></div>
     </section>
     <main>
         <div class="container">
@@ -134,7 +122,7 @@
     </main>
     <footer>
         <div class="footer">
-            Copyright &copy; 2019 - 2023 Armino.
+            Copyright &copy; 2019 - 2024 Armino.
         </div>
     </footer>
 </body>
@@ -144,7 +132,8 @@
   crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
-<script src="../src/timed-dialog.js?v=5638c4a78dc820db339e2b8026cf0472"></script>
+<script src="../dist/timed-dialog.min.js?v=5638c4a78dc820db339e2b8026cf0472"></script>
+<script type="module" src="https://esm.sh/@armino-dev/comparing-slider/dist/comparing-slider.min.js"></script>
 <script type="text/javascript">
     $(document).on('click', 'button[id^="my-button-"]', function(evt) {
         var options = {};
@@ -223,18 +212,19 @@
     });
 
     window.addEventListener('load', () => {
-        const hero = document.getElementById('hero');
-        const topLayer = hero.querySelector('.top');
-        const bottomLayer = hero.querySelector('.bottom');
-        const handle = hero.querySelector('.handle');
-        let delta = 0;
+        const options = {
+            containerId: 'hero-container',
+            left: {
+                image: 'images/jquery-timed-dialog-ui-light.webp',
+                alt: 'light theme ui'
+            },
+            right: {
+                image: 'images/jquery-timed-dialog-ui-dark.webp',
+                alt: 'dark theme ui'
+            }
+        };
 
-        hero.addEventListener('mousemove', (e) => {
-           delta = (e.clientX - window.innerWidth / 2) * 0.5;
-           handle.style.left = `${e.clientX + delta}px`;
-           topLayer.style.width = `${e.clientX + delta}px`;
-        });
+        createComparingSlider(options);
     });
 </script>
-
 </html>
