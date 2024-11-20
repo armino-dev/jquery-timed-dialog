@@ -1,7 +1,7 @@
 {
   "name": "@armino-dev/jquery-timed-dialog",
   "title": "jQuery Timed Dialog",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "A jQuery timed dialog UI",
   "homepage": "https://github.com/armino-dev/jquery-timed-dialog#readme",
   "main": "dist/timed-dialog.min.js",
@@ -35,21 +35,21 @@
     "jquery": "^3.7.1"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.16",
+    "autoprefixer": "^10.4.20",
     "codecov": "^3.8.2",
-    "esbuild": "^0.20.0",
-    "esbuild-sass-plugin": "^3.0.0",
-    "eslint": "^8.53.0",
+    "esbuild": "^0.24.0",
+    "esbuild-sass-plugin": "^3.3.1",
+    "eslint": "^9.15.0",
     "eslint-config-jquery": "^3.0.2",
     "eslint-plugin-jquery": "^1.5.1",
-    "karma": "^6.3.20",
+    "karma": "^6.4.4",
     "karma-chrome-launcher": "^3.1.1",
     "karma-coverage": "^2.2.0",
     "karma-jasmine": "^5.0.1",
-    "mini-css-extract-plugin": "^2.6.0",
-    "postcss": "^8.4.33",
-    "puppeteer": "^22.0.0",
-    "release-it": "^17.0.3"
+    "mini-css-extract-plugin": "^2.9.2",
+    "postcss": "^8.4.49",
+    "puppeteer": "^23.8.0",
+    "release-it": "^17.10.0"
   },
   "license": "MIT",
   "bugs": {

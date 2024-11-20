@@ -2,6 +2,7 @@
  * jQuery Timed Dialog Plugin style sheet
  * Author: Armino Popp, <devel@boioiong.com>
  */
+@use "sass:color";
 
 $dialog-bg-color: #fff;
 $header-bg-color: #1055aa;
@@ -104,7 +105,7 @@ button {
             background-color: $header-bg-color !important;
 
             &:hover {
-                background-color: lighten($header-bg-color, 20) !important;
+                background-color: color.adjust($header-bg-color, $lightness: 20%) !important;
             }
         }
 
@@ -120,9 +121,9 @@ button {
             left:0;
             top:0;
             height:100%;
-            background-color:rgba(lighten($header-bg-color, 20), .7);
+            background-color:rgba(color.adjust($header-bg-color, $lightness: 20%), .7);
             &.hover {
-                background-color:rgba(darken($header-bg-color, 20), .7) !important;
+                background-color:rgba(color.adjust($header-bg-color, $lightness: -20%), .7) !important;
             }
         }
 
@@ -140,13 +141,13 @@ button {
             border:2px solid $btn-text-color;
             border-radius: 100%;
             &:hover {
-                background-color: rgba(lighten($header-bg-color, 20), .7) !important;
+                background-color: rgba(color.adjust($header-bg-color, $lightness: 20%), .7) !important;
             }
 
         }
 
         &:hover {
-            background-color: rgba(lighten($btn-bg-color, 20), 1);
+            background-color: rgba(color.adjust($btn-bg-color, $lightness: 20%), 1);
             color: $btn-text-color;
         }
     }
@@ -181,14 +182,14 @@ button {
             &.btn-primary {
                 background-color: $header-bg-color-dark !important;
                 &:hover {
-                    background-color: lighten($header-bg-color-dark, 20) !important;
+                    background-color: color.adjust($header-bg-color-dark, $lightness: 20%) !important;
                 }
             }
 
             span.meter {
-                background-color:rgba(lighten($header-bg-color-dark, 20), .7);
+                background-color:rgba(color.adjust($header-bg-color-dark, $lightness: 20%), .7);
                 &.hover {
-                    background-color:rgba(darken($header-bg-color-dark, 20), .7) !important;
+                    background-color:rgba(color.adjust($header-bg-color-dark, $lightness: -20%), .7) !important;
                 }
             }
 
@@ -197,12 +198,12 @@ button {
                 color: $btn-text-color-dark;
                 border:2px solid $btn-text-color-dark;
                 &:hover {
-                    background-color: rgba(lighten($header-bg-color-dark, 20), .7) !important;
+                    background-color: rgba(color.adjust($header-bg-color-dark, $lightness: 20%), .7) !important;
                 }
             }
 
             &:hover {
-                background-color: rgba(lighten($btn-bg-color-dark, 20), 1);
+                background-color: rgba(color.adjust($btn-bg-color-dark, $lightness: 20%), 1);
                 color: $btn-text-color-dark;
             }
         }
