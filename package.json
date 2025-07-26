@@ -37,7 +37,7 @@
   "devDependencies": {
     "autoprefixer": "^10.4.20",
     "codecov": "^3.8.2",
-    "esbuild": "^0.24.0",
+    "esbuild": "^0.25.8",
     "esbuild-sass-plugin": "^3.3.1",
     "eslint": "^9.15.0",
     "eslint-config-jquery": "^3.0.2",
@@ -48,8 +48,8 @@
     "karma-jasmine": "^5.0.1",
     "mini-css-extract-plugin": "^2.9.2",
     "postcss": "^8.4.49",
-    "puppeteer": "^23.8.0",
-    "release-it": "^17.10.0"
+    "puppeteer": "^24.15.0",
+    "release-it": "^19.0.4"
   },
   "license": "MIT",
   "bugs": {
